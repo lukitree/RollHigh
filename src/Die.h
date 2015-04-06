@@ -10,7 +10,7 @@
 
 class Die{
 public:
-					Die (int _sides);
+					Die(int size);
 	int 			roll(void);
 
 private:

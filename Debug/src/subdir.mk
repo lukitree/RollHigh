@@ -4,6 +4,7 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
+../src/Die.cpp \
 ../src/Game.cpp \
 ../src/Player.cpp \
 ../src/UI.cpp \
@@ -11,6 +12,7 @@ CPP_SRCS += \
 ../src/main.cpp 
 
 OBJS += \
+./src/Die.o \
 ./src/Game.o \
 ./src/Player.o \
 ./src/UI.o \
@@ -18,6 +20,7 @@ OBJS += \
 ./src/main.o 
 
 CPP_DEPS += \
+./src/Die.d \
 ./src/Game.d \
 ./src/Player.d \
 ./src/UI.d \
