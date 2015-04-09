@@ -11,15 +11,11 @@
 #include "Game.h"
 
 //testing only
-#include "Die.h"
+#include "Roller.h"
 
 int main(void){
-	Die die(10);
-	for(int q = 0; q < 10; ++q){
-		std::cout << die.roll() << ' ';
-	}
-	std::cout << std::endl;
-	//Game game;
-	//game.run();
+	Game game;
+	game.init();
+	game.run();
 	return 0;
 }

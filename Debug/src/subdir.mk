@@ -4,25 +4,25 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CPP_SRCS += \
-../src/Die.cpp \
 ../src/Game.cpp \
 ../src/Player.cpp \
+../src/Roller.cpp \
 ../src/UI.cpp \
 ../src/Window.cpp \
 ../src/main.cpp 
 
 OBJS += \
-./src/Die.o \
 ./src/Game.o \
 ./src/Player.o \
+./src/Roller.o \
 ./src/UI.o \
 ./src/Window.o \
 ./src/main.o 
 
 CPP_DEPS += \
-./src/Die.d \
 ./src/Game.d \
 ./src/Player.d \
+./src/Roller.d \
 ./src/UI.d \
 ./src/Window.d \
 ./src/main.d 

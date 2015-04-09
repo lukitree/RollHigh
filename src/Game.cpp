@@ -11,6 +11,7 @@ Game::Game() : p1(1), p2(2), p3(3), p4(4), ui(){
 	initscr();
 	refresh();
 	player_count = 0;
+	play = true;
 }
 
 Game::~Game(void){
@@ -18,12 +19,23 @@ Game::~Game(void){
 }
 
 void
-Game::run(void){
+Game::init(void){
 	get_player_count();
 	get_player_names();
 	setup_players();
 	setup_ui();
 	pause();
+}
+
+void
+Game::run(void){
+	while(play)
+	{
+		roll.start_cycle(10);
+
+
+		roll.stop_cycle();
+	}
 }
 
 void

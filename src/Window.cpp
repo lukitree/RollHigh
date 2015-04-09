@@ -18,6 +18,6 @@ Window::create(std::string title, int win_height, int win_width, int win_pos_y, 
 }
 
 void
-Window::print_number(char c){
+Window::print_number(const char& c){
 	mvwaddch(window, (height/2), (width/2), c);
 }

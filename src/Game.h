@@ -13,12 +13,14 @@
 #include <string>
 #include "Player.h"
 #include "UI.h"
+#include "Roller.h"
 
 class Game {
 public:
 					Game(void);
 					~Game(void);
 	void			run(void);
+	void 			init(void);
 
 private:
 	void 			print_top(const char* msg);
@@ -28,12 +30,15 @@ private:
 	void 			setup_players(void);
 	void 			setup_ui(void);
 
+	bool 			play;
 	int 			player_count;
 	Player			p1;
 	Player 			p2;
 	Player 			p3;
 	Player 			p4;
 	UI				ui;
+
+	Roller 			roll;
 };
 
 #endif /* GAME_H_ */
