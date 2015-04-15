@@ -15,21 +15,33 @@
 
 class Player {
 public:
-						Player(unsigned int pnum);
+						Player(void);
 	void 				spawn(int loc_y, int loc_x);
 	void 				kill(void);
 	void				increase_score(void);
 	void 				reset_score(void);
 	void 				set_name(const char* _name);
+	void 				set_input_key(char key);
+	void 				set_number(int i);
+	bool 				is_stopped(void);
+	char 				get_input_key(void);
+	void 				stop_on_number(void);
+	int 				get_score(void);
+	int 				get_number(void);
+	std::string 		get_name(void);
+	void 				reset(void);
 
 private:
-	void 				display_selected_number(Roller& roll);
-	void 				display_cycle_number(void);
+	void 				display_number(void);
 
-	unsigned int		number;
+	char 				player_key;
+	int					number;
+	int 				score;
 	Window				window;
-	unsigned int 		score;
 	std::string 		name;
+	bool 				stopped;
+	int 				win_height;
+	int 				win_width;
 };
 
 #endif /* PLAYER_H_ */

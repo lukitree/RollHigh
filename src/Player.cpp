@@ -8,15 +8,21 @@
 #include "Player.h"
 #include <iostream>
 
-Player::Player(unsigned int pnum){
-	number = pnum;
+Player::Player(){
 	score = 0;
 	name = "Empty";
+	player_key = ' ';
+	stopped = false;
+	number = -1;
+
+	win_height = 5;
+	win_width = 9;
 }
 
 void
 Player::spawn(int loc_y, int loc_x){
-	window.create(name, 5, 10, loc_y, loc_x);
+	window.create(name, player_key, win_height, win_width, loc_y, loc_x);
+//	window.print_input_key(player_key);
 }
 
 void
@@ -40,11 +46,55 @@ Player::set_name(const char* _name){
 }
 
 void
-Player::display_selected_number(Roller& roll){
-	window.print_number(roll.get_number() + '0');
+Player::set_input_key(char key){
+	player_key = key;	
 }
 
 void
-Player::display_cycle_number(void){
-	window.print_number('x');
+Player::set_number(int i){
+	if(!stopped)
+	{
+		number = i;
+	}
+	display_number();
+}
+
+void
+Player::display_number(void){
+		window.print_number(number);
+}
+
+bool
+Player::is_stopped(void){
+	return stopped;
+}
+
+char
+Player::get_input_key(void){
+	return player_key;
+}
+
+void
+Player::stop_on_number(void){
+	stopped = true;
+}
+
+int
+Player::get_number(void){
+	return number;
+}
+
+int
+Player::get_score(void){
+	return score;
+}
+
+void
+Player::reset(void){
+	stopped = false;
+}
+
+std::string
+Player::get_name(void){
+	return name;
 }
