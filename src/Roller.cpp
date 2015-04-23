@@ -25,9 +25,10 @@ Roller::stop_cycle(void){
 }
 
 void Roller::cycle(void){
+	int sleep_time = 10;
 	while(keep_cycling)
 	{
-		std::this_thread::sleep_for(std::chrono::nanoseconds(1));
+		std::this_thread::sleep_for(std::chrono::milliseconds(sleep_time));
 		if(number < sides-1)
 			++number;
 		else
