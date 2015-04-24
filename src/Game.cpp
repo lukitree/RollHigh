@@ -8,6 +8,7 @@
 #include "Game.h"
 #include <algorithm>
 #include "pair_compare.h"
+#include <string>
 
 Game::Game() : p1(), p2(), p3(), p4(), ui(){
 	initscr();
@@ -83,21 +84,53 @@ Game::get_player_count(void){
 	std::string format_string;
 	format_string = std::to_string(player_count) + " players selected.";
 	print_top(format_string.c_str());
+	std::this_thread::sleep_for(std::chrono::seconds(1));
+
 }
 
 void
 Game::get_player_names(void){
-	switch(player_count)
-	{
-		case 4:
-			p4.set_name("Bob");
-		case 3:
-			p3.set_name("Ted");
-		case 2:
-			p2.set_name("Joe");
-			p1.set_name("Will");
+	//Player players[4] {p1, p2, p3, p4};
+	std::vector<Player*> players {&p1, &p2, &p3, &p4};
 
+	std::string name;
+	char c;
+
+
+	for(int i = 0; i < player_count; ++i)
+	{
+		std::string msg;
+		msg += "Enter player " + std::to_string(i+1) + "'s name: ";
+		print_top(msg);
+		while((c = getch()) != '\n')
+		{
+			switch(c)
+			{
+				case KEY_DC:
+					std::cerr << "Backspace detected" << std::endl;
+					name.pop_back();
+					delch();
+					break;
+				default:
+					addch(c);
+					name += c;
+			}
+		}
+		players[i]->set_name(name.c_str());
+		name.clear();
 	}
+
+//	switch(player_count)
+//	{
+//		case 4:
+//			p4.set_name("Bob");
+//		case 3:
+//			p3.set_name("Ted");
+//		case 2:
+//			p2.set_name("Joe");
+//			p1.set_name("Will");
+//
+//	}
 }
 
 void
@@ -106,8 +139,10 @@ Game::spawn_player_window(void){
 	{
 		case 4:
 			p4.spawn(3, 35);
+			//no break
 		case 3:
 			p3.spawn(5, 25);
+			//no break
 		case 2:
 			p2.spawn(7, 15);
 			p1.spawn(9, 5);
@@ -132,8 +167,10 @@ Game::update_player_numbers(void){
 	{
 		case 4:
 			p4.set_number(tmp);
+			//no break
 		case 3:
 			p3.set_number(tmp);
+			//no break
 		case 2:
 			p2.set_number(tmp);
 			p1.set_number(tmp);
@@ -147,8 +184,10 @@ Game::get_player_input(void){
 	{
 		case 4:
 			p4.set_input_key('m');
+			//no break
 		case 3:
 			p3.set_input_key('b');
+			//no break
 		case 2:
 			p2.set_input_key('c');
 			p1.set_input_key('z');
@@ -163,12 +202,15 @@ Game::check_all_players_done(void){
 		case 4:
 			if(p4.is_stopped())
 				++check;
+				//no break
 		case 3:
 			if(p3.is_stopped())
 				++check;
+				//no break
 		case 2:
 			if(p2.is_stopped())
 				++check;
+				//no break
 		case 1:
 			if(p1.is_stopped())
 				++check;
@@ -221,8 +263,10 @@ Game::check_numbers(void){
 	switch(player_count){
 		case 4:
 			scores.push_back(std::make_pair(4, p4.get_number()));
+			//no break
 		case 3:
 			scores.push_back(std::make_pair(3, p3.get_number()));
+			//no break
 		case 2:
 			scores.push_back(std::make_pair(2, p2.get_number()));
 			scores.push_back(std::make_pair(1, p1.get_number()));
@@ -238,8 +282,10 @@ Game::assign_points(void){
 	{
 		case 4:
 			player[4] = &p4;
+			//no break
 		case 3:
 			player[3] = &p3;
+			//no break
 		case 2:
 			player[2] = &p2;
 			player[1] = &p1;
@@ -262,8 +308,10 @@ Game::reset_players(void){
 	{
 		case 4:
 			p4.reset();
+			//no break
 		case 3:
 			p3.reset();
+			//no break
 		case 2:
 			p2.reset();
 			p1.reset();
