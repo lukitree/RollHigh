@@ -85,7 +85,6 @@ Game::get_player_count(void){
 	format_string = std::to_string(player_count) + " players selected.";
 	print_top(format_string.c_str());
 	std::this_thread::sleep_for(std::chrono::seconds(1));
-
 }
 
 void
@@ -95,42 +94,39 @@ Game::get_player_names(void){
 
 	std::string name;
 	char c;
+	const int MAX_CHARS = 3;
 
 
 	for(int i = 0; i < player_count; ++i)
 	{
-		std::string msg;
-		msg += "Enter player " + std::to_string(i+1) + "'s name: ";
-		print_top(msg);
+		std::string prompt;
+		prompt = "Enter player " + std::to_string(i+1) + "'s name: ";
+		print_top(prompt);
 		while((c = getch()) != '\n')
 		{
+			std::string msg;
 			switch(c)
 			{
-				case KEY_DC:
-					std::cerr << "Backspace detected" << std::endl;
-					name.pop_back();
-					delch();
+				case 127:
+					if(!name.empty())
+					{
+						name.pop_back();
+					}
+					msg = prompt + name;
+					print_top(msg.c_str());
 					break;
 				default:
-					addch(c);
-					name += c;
+					if (name.length() < MAX_CHARS)
+					{
+						name += c;
+					}
+					msg = prompt + name;
+					print_top(msg.c_str());
 			}
 		}
 		players[i]->set_name(name.c_str());
 		name.clear();
 	}
-
-//	switch(player_count)
-//	{
-//		case 4:
-//			p4.set_name("Bob");
-//		case 3:
-//			p3.set_name("Ted");
-//		case 2:
-//			p2.set_name("Joe");
-//			p1.set_name("Will");
-//
-//	}
 }
 
 void
